@@ -1,6 +1,6 @@
-[Back to index](#Index)
+[Back to index](#index)
 
-MODULE: Inventory/Card-Stack
+## Inventory/Card-Stack
 
 CREATED: Kace (Sat Sep 28 01:09:16 PDT 2019)
 

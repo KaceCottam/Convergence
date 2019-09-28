@@ -36,7 +36,7 @@ index.html: ${DOCS}
 	@cat README.MD >> index.md
 	@echo '\n\n***\n\n' >> index.md
 	@echo "## Index\n\n" >> index.md
-	@for i in ${DOC_NOEXT}; do printf '+ [%s](%s)\n\n' "$$i" "#$$i" >> index.md; done
+	@for i in ${DOC_NOEXT}; do echo "$$i" | awk 'BEGIN { FS="/" } { printf "[%s](#%s%s)\n\n", $$i, tolower($$1), tolower($$2) }' >> index.md; done
 	@echo "\n\n***\n\n" >> index.md;
 	@for i in $^; do cat "$$i" >> index.md; echo "\n\n***\n\n" >> index.md; done
 	@pandoc -o $@ index.md
@@ -45,6 +45,8 @@ index.html: ${DOCS}
 
 define TEMPLATE_TEXT
 [Back to index](#Index)
+
+## ${CATEGORY}/${NAME}
 
 MODULE: ${CATEGORY}/${NAME}
 
@@ -75,8 +77,8 @@ endif
 ifdef NAME
 ifdef CATEGORY
 ifdef AUTHOR
-	mkdir -fv ${CATEGORY};
-	@if [ -f ${NAME}.md ]; then echo "${NAME}.md already exists!"; else \
+	mkdir -pv ${CATEGORY};
+	@if [ -f ${CATEGORY}/${NAME}.md ]; then echo "${NAME}.md already exists!"; else \
 		echo "$$TEMPLATE_TEXT" > ${CATEGORY}/${NAME}.md;                  \
 		echo "Created ${CATEGORY}/${NAME}.md";                            \
 	fi
