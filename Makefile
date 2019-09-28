@@ -1,4 +1,4 @@
-DOCS      := $(shell find *.md)
+DOCS      := $(shell find */*.md)
 DOC_OBJS  := ${DOCS:.md=.html}
 DOC_NOEXT := ${DOCS:%.md=%}
 DATE      := $(shell date)
@@ -30,23 +30,25 @@ debug: ## Prints debug information
 	@pandoc -o $@ $<
 	@echo "Done."
 
-index.html: docs
+index.html: ${DOCS}
 	@echo "Compiling $@..."
 	@rm $@ -f
-	@echo "# Index" > ${@:.html=.md}
-	@for i in ${DOC_NOEXT}; do printf '+ [%s](%s)\n\n' "$$i" "$$i.html" >> ${@:.html=.md}; done
-	@pandoc -o $@ ${@:.html=.md}
-	@rm ${@:.html=.md}
+	@cat README.MD >> index.md
+	@echo '\n\n***\n\n' >> index.md
+	@echo "## Index\n\n" >> index.md
+	@for i in ${DOC_NOEXT}; do printf '+ [%s](%s)\n\n' "$$i" "#$$i" >> index.md; done
+	@echo "\n\n***\n\n" >> index.md;
+	@for i in $^; do cat "$$i" >> index.md; echo "\n\n***\n\n" >> index.md; done
+	@pandoc -o $@ index.md
+	@rm index.md
 	@echo "Done."
 
 define TEMPLATE_TEXT
-[Back to index](index.html)
+[Back to index](#index)
 
 MODULE: ${CATEGORY}/${NAME}
 
 CREATED: ${AUTHOR} (${DATE})
-
-***
 
 ADDS:
 
@@ -73,9 +75,10 @@ endif
 ifdef NAME
 ifdef CATEGORY
 ifdef AUTHOR
+	mkdir -fv ${CATEGORY};
 	@if [ -f ${NAME}.md ]; then echo "${NAME}.md already exists!"; else \
-		echo "$$TEMPLATE_TEXT" > ${NAME}.md;                              \
-		echo "Created ${NAME}.md";                                        \
+		echo "$$TEMPLATE_TEXT" > ${CATEGORY}/${NAME}.md;                  \
+		echo "Created ${CATEGORY}/${NAME}.md";                            \
 	fi
 endif
 endif
