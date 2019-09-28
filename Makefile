@@ -44,7 +44,7 @@ index.html: ${DOCS}
 	@echo "Done."
 
 define TEMPLATE_TEXT
-[Back to index](#index)
+[Back to index](#Index)
 
 MODULE: ${CATEGORY}/${NAME}
 
