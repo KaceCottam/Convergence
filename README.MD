@@ -1,4 +1,4 @@
-Convergence
+Convergence ([Website](http://KaceCottam.github.io/Convergence) | [Github](http://www.github.com/KaceCottam/Convergence))
 ===
 
 Description
@@ -10,3 +10,4 @@ Credits
 ---
 - Jake Arent
 - Jared Freeman
+- [Kace Cottam](. "Website")

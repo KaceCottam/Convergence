@@ -30,7 +30,7 @@ debug: ## Prints debug information
 	@pandoc -o $@ $<
 	@echo "Done."
 
-index.html: ${DOCS}
+index.html: README.MD ${DOCS}
 	@echo "Compiling $@..."
 	@rm $@ -f
 	@cat README.MD >> index.md
@@ -38,14 +38,12 @@ index.html: ${DOCS}
 	@echo "## Index\n\n" >> index.md
 	@for i in ${DOC_NOEXT}; do echo "$$i" | awk 'BEGIN { FS="/" } { printf "[%s](#%s%s)\n\n", $$i, tolower($$1), tolower($$2) }' >> index.md; done
 	@echo "\n\n***\n\n" >> index.md;
-	@for i in $^; do cat "$$i" >> index.md; echo "\n\n***\n\n" >> index.md; done
+	@for i in ${DOCS}; do cat "$$i" >> index.md; echo "\n\n***\n\n" >> index.md; done
 	@pandoc -o $@ index.md
 	@rm index.md
 	@echo "Done."
 
 define TEMPLATE_TEXT
-[Back to index](#Index)
-
 ## ${CATEGORY}/${NAME}
 
 MODULE: ${CATEGORY}/${NAME}
@@ -58,9 +56,7 @@ ADDS:
 
 CARD TEXT:
 
-```md
-
-```
+[Back to index](#Index)
 endef
 export TEMPLATE_TEXT
 

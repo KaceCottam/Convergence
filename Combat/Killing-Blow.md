@@ -1,5 +1,3 @@
-[Back to index](#Index)
-
 ## Combat/Killing-Blow
 
 MODULE: Combat/Killing-Blow
@@ -12,7 +10,8 @@ ADDS:
 
 CARD TEXT:
 
-```md
 If the DM thinks what you did is gonna kill the thing, it’ll kill the damn
 thing -- no rolls necessary
-```
+
+[Back to index](#Index)
+

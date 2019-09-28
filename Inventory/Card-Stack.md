@@ -1,6 +1,6 @@
-[Back to index](#index)
-
 ## Inventory/Card-Stack
+
+MODULE: Inventory/Card-Stack
 
 CREATED: Kace (Sat Sep 28 01:09:16 PDT 2019)
 
@@ -11,7 +11,6 @@ ADDS:
 
 CARD TEXT:
 
-```md
 Carry weight is modified by perks.
 
 Every item has a card with a carry amount. This includes all armor, weapons,
@@ -24,4 +23,6 @@ in every action that requires a roll.
 Each character has an inventory which is made of a stack of cards. In Roll20,
 there is a decks tab that players could make decks with.
 
-```
+
+[Back to index](#index)
+
