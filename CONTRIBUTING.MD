@@ -16,3 +16,5 @@ REQUIRES:
 CARD TEXT:
   <TEXT>
 ```
+
+Before pushing, do `make index.html` in order to update index.html.
